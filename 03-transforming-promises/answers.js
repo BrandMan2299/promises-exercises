@@ -8,8 +8,17 @@
  */
 function mapPromise(promise, transformer){
   return new Promise((resolve, reject) => {
-    /* IMPLEMENT ME!! */
-  });
+    promise.then(val => {
+      const result = transformer(val);
+      if(result){
+        resolve(result)
+      }
+      else{
+        reject(result)
+      }
+    })
+    .catch(err => {reject(err)})
+  })
 }
 
 /**
@@ -20,8 +29,19 @@ function mapPromise(promise, transformer){
  * @returns {Promise<number>}
  */
 function squarePromise(numberPromise){
-  return numberPromise
-    .then(/* IMPLEMENT ME! */);
+  return numberPromise.then(result =>{
+    if(typeof result === "number"){
+      result*=result;
+    }
+    else{
+      if(isNaN(parseInt(result))){
+        result = "Cannot convert to a number!"
+      }
+      else{
+        result = parseInt(result)*parseInt(result);
+      }
+    }
+  });
 }
 
 /**
