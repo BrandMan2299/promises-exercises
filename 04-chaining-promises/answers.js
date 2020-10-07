@@ -44,6 +44,11 @@ function makeGetUserByIdWithOrganization(getUserById, getOrganizationById){
         });
       }
     })
+    const user = getUserById(userId);
+    if(user){
+      user.organization = getOrganizationById(user.organizationId);
+      return user;
+    }
   };
 }
 
